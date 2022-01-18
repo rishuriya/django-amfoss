@@ -46,31 +46,34 @@
                     <div class="col-lg-8 m-15px-tb">
                         <article class="article">
                             <div class="article-img">
-                                <img src="amfoss_seo.png" title="" alt="img" height='500' width='800'>
+                                <img src="amfoss_seo.png" title="" alt="img" height='300' width='800'>
                             </div>
+                            {% for post in posts %}
                             <div class="article-title">
                                 <h6><a href="#"><!--tag--></a></h6>
-                                <h2><!---title--></h2>
+                                <h2>{{ post.title }}</h2>
                                 <div class="media">
                                     <div class="avatar">
                                        <!--- <img src="<?php echo $row2['profile_img'];?>" title="" alt="">--->
                                     </div>
                                     <div class="media-body">
-                                        <label><!--title---></label>
-                                        <span><!---time--></span>
+                                        <label>{{ post.title }}</label>
+                                        <span>{{ post.published_date }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="article-content">
-                                <p><!--article--></p>
+                                <p>{{ post.text|linebreaksbr }}</p>
                             </div>
-                            
+                            {% endfor %}
                         </article>
                         
                     </div>                    
                 </div>
             </div>
         </div>
+        </div>
+
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
