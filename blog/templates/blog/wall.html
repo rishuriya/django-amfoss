@@ -11,8 +11,19 @@
         <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Galada&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
         <link href="{% static 'css/readmore.css' %}" rel="stylesheet">
+        <style>
+            a{
+                text-decoration: none;
+                color: #000000;
+                font-family: 'Galada', cursive;
+            }
+            a:hover {
+            text-decoration: underline;
+            color: #000000;
+            }
+        </style>
     </head>
-    <body class="bgimg">
+    <body class="">
         <nav class="navbar navbar-light bg-light fixed-top">
             <div class="container-fluid mb-0">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -29,11 +40,11 @@
                 <div class="offcanvas-body">
                   <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="../../">Home</a>
+                      <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <hr class=""/>
                     <li class="nav-item">
-                      <a class="nav-link" href="../../">Blog Wall</a>
+                      <a class="nav-link active" href="../../">Blog Wall</a>
                     </li>
                     <hr class=""/>
                     <li class="nav-item">
@@ -45,20 +56,34 @@
             </div>
           </nav>
           <div class="d-flex justify-content-center align-items-center pt-5">
-            <div class="card" style="width: 55rem;">
-              <div class="card-body" style="margin-top: 10px;">
-                <div>
-                <img src="{{ post.imag.url }}" alt="blog image" height='320px' width='848px' />
+            <div class="card pt-5 " style="width: 58rem; border: 0;">
+                <div class="row row-cols-1 row-cols-md-3 g-4" style="width: 58rem;">
+                    {% for post in posts %}
+                    <div class="col mb-3 pl-2">
+                      <div class="card h-100 border border-light shadow-0 cdbg">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                            <a href="{% url 'post_detail' pk=post.pk %}">
+                            <img src="{{ post.imag.url}}" class="img-fluid"/>
+                              <div class="mask" style="background-color: rgb(255, 255, 255);"></div>
+                            </a>
+                          </div>
+                        <div class="card-body">
+                            <div><a href="{% url 'post_detail' pk=post.pk %}" name='blogid' class="">
+                          <h5 class="card-title">{{ post.title }}</h5></a></div>
+                          <p class="card-text">
+                            {{ post.subtitle }}
+                          </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-bold" style="font-family: 'Galada', cursive;">{{ post.author}}</small>
+                        </div>
+                        <div class="card-footer">
+                           <small class="text-muted" style="font-family: 'caveat', cursive;">{{ post.published_date}}</small>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
                 </div>
-                <hr/>
-                <h1 class="d-flex justify-content-center fs-2" style="font-family: 'galada' ,cursive;">{{ post.title }}</h1>
-                <hr width="40%" style="margin: auto;"/>
-                <h1 class="d-flex justify-content-left fs-5" style="font-family: cursive;">{{ post.subtitle }}</h1>
-                <p class="fw-lighter">{{ post.published_date }}</p>
-                <p class="fw-bold mt-0">{{ post.author }}</p>
-                <hr />
-                <article>{{ post.text }}</article>
-              </div>
             </div>
           </div>
           <footer class="footer mt-auto py-3 bg-light">
