@@ -1,0 +1,7 @@
+.formimg{
+    background-image: url('../wall.png'); 
+    background-size: cover;
+  }
+  .linkc{
+    text-decoration:none
+  }
